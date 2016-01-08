@@ -4,7 +4,7 @@
     "description" : "Helper library for using resources made of native code",
     "author" : "Rob Hoelz",
     "depends" : ["LibraryMake"],
-    "source-url" : "https://github.com/hoelzro/p6-native-resources",
+    "source-url" : "https://github.com/hoelzro/p6-native-resources.git",
     "provides" : {
         "Native::Resources" : "lib/Native/Resources.pm",
         "Native::Resources::Build" : "lib/Native/Resources/Build.pm"
