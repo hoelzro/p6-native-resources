@@ -1,3 +1,72 @@
+use v6;
+
+=head1 TITLE
+Native::Resources
+=head1 SYNOPSIS
+=begin code
+    # assume you're building a helper library named 'helper'
+
+    # in Build.pm at the root of your distribution
+    use Panda::Builder;
+    use Native::Resources::Build;
+
+    class Build is Panda::Builder {
+        method build($workdir) {
+            make($workdir, "$workdir/resources/lib", :libname<helper>);
+        }
+    }
+
+    # in Makefile.in
+    all: resources/lib/libhelper%SO% %FAKESO%
+
+    # rest of Makefile rules
+
+    # in META.info
+    {
+        ...other metadata...
+        "resources": [
+            "lib/libhelper.so",
+            "lib/libhelper.dll",
+            "lib/libhelper.dylib"
+        ],
+    }
+
+    # in lib/Helper.pm (or whatever your module is called)
+    use Native::Resources;
+    use NativeCall;
+
+    our sub call_helper() is native(resource-lib('helper', :%?RESOURCES)) { * }
+=end code
+=begin head1
+DESCRIPTION
+
+Most of the time when you use NativeCall, you can just refer to libraries that
+your OS has installed by default.  However, sometimes, you want to bundle native
+libraries into your distribution.  There are several reasons for doing this, among
+them are:
+
+=for item1
+You have no guarantee that a library will be installed, or that it will be of the
+correct version, so you bundle your own
+
+=for item1
+You're wrapping C++ code, which is tricky (or sometimes impossible) to do with NativeCall,
+so you need to write some C code to wrap the C++ into something NativeCall can use
+
+This distribution provides two modules to help reduce the boilerplate you need to write
+for this situation.  L<Native::Resources> provides C<resource-lib>, which consults
+your distribution's resources and determines the correct file to use.  L<Native::Resources::Build>
+provides a C<make> subroutine meant to be called from C<Build.pm> at your distribution's
+root.
+=end head1
+
+=begin head1
+EXAMPLES
+
+L<https://github.com/hoelzro/p6-linenoise|Linenoise>
+L<https://github.com/hoelzro/p6-xapian|Xapian>
+=end head1
+
 module Native::Resources:auth<github:hoelzro>:ver<0.1.0> {
     # This needs to be in a class because of RT 127089
     my class Helper {
@@ -18,6 +87,9 @@ module Native::Resources:auth<github:hoelzro>:ver<0.1.0> {
         }
     }
 
+    #| Returns a filename that corresponds to the given library (denoted by
+    #| C<$libname>).  You need to pass your C<%?RESOURCES> in so the sub
+    #| knows where to look
     our sub resource-lib(Str $libname, :%RESOURCES) returns Code is export {
         -> --> Str {
             state $lib;
@@ -30,4 +102,3 @@ module Native::Resources:auth<github:hoelzro>:ver<0.1.0> {
         }
     }
 }
-
