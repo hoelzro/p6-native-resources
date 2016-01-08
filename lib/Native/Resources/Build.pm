@@ -33,6 +33,7 @@ module Native::Resources::Build {
             qq{$filename:\n\tperl6 -e "print ''" > $filename}
         }).join("\n");
 
+        mkdir($destfolder);
         process-makefile($folder, %vars);
         spurt("$folder/Makefile", $fake-so-rules, :append);
         shell(%vars<MAKE>);
