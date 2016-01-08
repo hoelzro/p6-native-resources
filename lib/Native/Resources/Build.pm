@@ -27,7 +27,7 @@ module Native::Resources::Build {
         my %vars = get-vars($destfolder);
         my @fake-shared-object-extensions = <.so .dll .dylib>.grep(* ne %vars<SO>);
 
-        %vars<FAKESO> = @fake-shared-object-extensions.map("resources/lib/lib$libname" ~ *);
+        %vars<FAKESO> = @fake-shared-object-extensions.map("resources/lib/lib$libname" ~ *).eager;
 
         my $fake-so-rules = %vars<FAKESO>.map(-> $filename {
             qq{$filename:\n\tperl6 -e "print ''" > $filename}
