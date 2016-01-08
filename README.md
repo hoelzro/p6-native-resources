@@ -5,38 +5,38 @@ Boilerplate helper for bundling native code
 # Synopsis
 
 ```perl6
-        # assume you're building a helper library named 'helper'
+# assume you're building a helper library named 'helper'
 
-         # in Build.pm at the root of your distribution
-         use Panda::Builder;
-         use Native::Resources::Build;
+# in Build.pm at the root of your distribution
+use Panda::Builder;
+use Native::Resources::Build;
 
-         class Build is Panda::Builder {
-             method build($workdir) {
-                 make($workdir, "$workdir/resources/lib", :libname<helper>);
-             }
-         }
+class Build is Panda::Builder {
+    method build($workdir) {
+        make($workdir, "$workdir/resources/lib", :libname<helper>);
+    }
+}
 
-         # in Makefile.in
-         all: resources/lib/libhelper%SO% %FAKESO%
+# in Makefile.in
+all: resources/lib/libhelper%SO% %FAKESO%
 
-         # rest of Makefile rules
+# rest of Makefile rules
 
-         # in META.info
-         {
-             ...other metadata...
-             "resources": [
-                 "lib/libhelper.so",
-                 "lib/libhelper.dll",
-                 "lib/libhelper.dylib"
-             ],
-         }
+# in META.info
+{
+    ...other metadata...
+    "resources": [
+        "lib/libhelper.so",
+        "lib/libhelper.dll",
+        "lib/libhelper.dylib"
+    ],
+}
 
-         # in lib/Helper.pm (or whatever your module is called)
-         use Native::Resources;
-         use NativeCall;
+# in lib/Helper.pm (or whatever your module is called)
+use Native::Resources;
+use NativeCall;
 
-         our sub call_helper() is native(resource-lib('helper', :%?RESOURCES)) { * }
+our sub call_helper() is native(resource-lib('helper', :%?RESOURCES)) { * }
 ```
 
 # Description
