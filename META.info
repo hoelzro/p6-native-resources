@@ -6,6 +6,7 @@
     "depends" : ["LibraryMake"],
     "source-url" : "https://github.com/hoelzro/p6-native-resources",
     "provides" : {
-        "Native::Resources" : "lib/Native/Resources.pm"
+        "Native::Resources" : "lib/Native/Resources.pm",
+        "Native::Resources::Build" : "lib/Native/Resources/Build.pm"
     }
 }
