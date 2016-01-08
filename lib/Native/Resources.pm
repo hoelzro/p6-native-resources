@@ -2,6 +2,10 @@ use v6;
 
 =head1 TITLE
 Native::Resources
+=head1 ABSTRACT
+Boilerplate helper for bundling native code
+=head1 AUTHOR
+Rob Hoelz
 =head1 SYNOPSIS
 =begin code
     # assume you're building a helper library named 'helper'

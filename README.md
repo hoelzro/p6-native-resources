@@ -2,6 +2,10 @@
 
 Boilerplate helper for bundling native code
 
+# Author
+
+Rob Hoelz
+
 # Synopsis
 
 ```perl6
