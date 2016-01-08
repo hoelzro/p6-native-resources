@@ -1,5 +1,7 @@
 # Native::Resources
 
+Boilerplate helper for bundling native code
+
 # Synopsis
 
 ```perl6
