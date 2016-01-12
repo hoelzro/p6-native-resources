@@ -72,6 +72,11 @@ L<https://github.com/hoelzro/p6-xapian|Xapian>
 =end head1
 
 =begin head1
+RATIONALE
+
+L<http://hoelz.ro/blog/distributing-helper-libraries-with-perl6-modules>
+
+=begin head1
 LICENSE
 
 Copyright (c) 2016 Rob Hoelz <rob at hoelz.ro>
