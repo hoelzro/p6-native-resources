@@ -88,4 +88,4 @@ sub resource-lib(
 ) returns Code
 ```
 
-Returns a filename that corresponds to the given library (denoted by C<$libname>). You need to pass your `%?RESOURCES` in so the sub knows where to look.
+Returns a filename that corresponds to the given library (denoted by `$libname`). You need to pass your `%?RESOURCES` in so the sub knows where to look.
