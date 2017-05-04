@@ -1,6 +1,7 @@
 {
     "perl" : "6.*",
     "name" : "Native::Resources",
+    "license" : "MIT",
     "version": "0.1.0",
     "description" : "(DEPRECATED) Helper library for using resources made of native code",
     "author" : "Rob Hoelz",
